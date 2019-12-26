@@ -11,11 +11,24 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+import os
 from urllib.request import urlretrieve
 
 from mlrun.execution import MLClientCtx
-from typing import IO, AnyStr, TypeVar, Union, List, Tuple, Any
+from typing import (IO, 
+                    AnyStr, 
+                    TypeVar, 
+                    Union, 
+                    List, 
+                    Tuple, Any)
 from pathlib import Path
+
+import pandas as pd
+import numpy as np
+import pyarrow.parquet as pq
+import pyarrow as pa
+
+from functions.tables import log_context_table
 
 __all__ = ["arc_to_parquet"]
 
@@ -24,8 +37,8 @@ def arc_to_parquet(
     context: MLClientCtx,
     archive_url: Union[str, Path, IO[AnyStr]],
     header: Union[None, List[str]] = None,
-    name: str = "original",
-    target_path: str = "content",
+    name: str = "",
+    target_path: str = "",
     chunksize: int = 10_000,
     log_data: bool = True,
 ) -> None:
@@ -70,5 +83,5 @@ def arc_to_parquet(
     if log_data:
         context.logger.info("logging data to context")
         df = pq.read_table(dest_path).to_pandas()
-        log_context_table(context, target_path, "data", df)
+        log_context_table(context, df, target_path, name)
 

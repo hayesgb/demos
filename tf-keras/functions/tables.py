@@ -18,12 +18,14 @@ import pyarrow as pa
 import pyarrow.parquet as pq
 
 from mlrun.execution import MLClientCtx
+from mlrun.artifacts import TableArtifact
+from mlrun.datastore import DataItem
 
 
 __all__ = ["get_context_table", "log_context_table"]
 
 
-def get_context_table(ctxtable: MLClientCtx) -> pd.DataFrame:
+def get_context_table(ctxtable: DataItem) -> pd.DataFrame:
     """Get table from context.
     
     Convenience function to retrieve a table via a blob.
@@ -42,7 +44,11 @@ def get_context_table(ctxtable: MLClientCtx) -> pd.DataFrame:
 
 
 def log_context_table(
-    context: MLClientCtx, table: pd.DataFrame, target_path: str = "", name: str = "",
+    context: MLClientCtx,
+    table: pd.DataFrame,
+    target_path: str = "",
+    key: str = "",
+    overwrite: bool = False
 ) -> None:
     """Log a table through the context.
     
@@ -52,10 +58,13 @@ def log_context_table(
     :param context:     function context
     :param table:       the object we wish to store
     :param target_path: location (folder) of our DataItem
-    :param name:        name of the object
+    :param key:         key of the object in the artifact store
+    :param, overwrite:  overwrite if object exists at target_path/name
     """
-    makedirs(target_path, exist_ok=True)
-    filepath = path.join(target_path, name)
-    context.logger.info(f"writing {name}")
-    pq.write_table(pa.Table.from_pandas(table), filepath)
-    context.log_artifact(name, target_path=filepath)
+#    makedirs(target_path, exist_ok=True)
+    
+    print(f"writing {target_path}")
+    if overwrite:
+        pq.write_table(pa.Table.from_pandas(table), target_path)
+
+    context.log_artifact(key, target_path=target_path)
