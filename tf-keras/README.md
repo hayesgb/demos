@@ -5,3 +5,5 @@ In this set of notebooks and functions we build an sklearn `Pipeline` into a Kub
 So for example, this Kubeflow pipeline could have its input models determined by 3 other pipelines that search over a wider sample of model structures. 
 
 And with MLRun, each step, of each pipeline, could have its own highly optimized/customized runtime with metrics and other data logged by the MLRun db and accessible through the Iguazia data fabric. 
+
+<br><p align="center"><img src="tf-keras-pipeline.PNG" width="500"/></p><br>
