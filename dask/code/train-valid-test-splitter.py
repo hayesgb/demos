@@ -82,7 +82,10 @@ def train_valid_test_splitter(
     features['CRSDepTime'] = features['CRSDepTime'].clip(upper=2399)
     features = features.categorize(columns=categories)
     feature_classes = dict()
-    before_encoding_shape = features.shape[1]
+    
+    # Category encoding
+    #before_encoding_shape = features.shape[1]
+    
     for cat in categories:
         le = LabelEncoder()
         features[cat] = le.fit_transform(features[cat])
@@ -90,8 +93,13 @@ def train_valid_test_splitter(
         # save this encoder
         dump(le, open(fp, 'wb'))
     
-    after_encoding_shape = features.shape[1]
-    context.logger.info(f'N FEATURES:\nbefore {before_encoding_shape}\nafter  {after_encoding_shape}')
+    #after_encoding_shape = features.shape[1]
+    #context.logger.info(f'N FEATURES:\nbefore {before_encoding_shape}\nafter  {after_encoding_shape}')
+    
+    # One-hot encoding - todo
+    
+    
+    
     
     # splits
     x, xtest, y, ytest = train_test_split(
@@ -132,7 +140,7 @@ def train_valid_test_splitter(
     test_set = dd.multi.concat([xtest, ytest], axis=1)
     test_set = test_set.reset_index()
     
-    fp = os.path.join(target_path, 'test_set.pqt')
-    dd.to_parquet(test_set, fp, append=False, compute=True)
+    fp = os.path.join(target_path, 'test_set')
+    dd.to_parquet(test_set, fp, append=False, compute=True, write_index=False)
     context.log_artifact('test_set', target_path=fp)
     

@@ -1,10 +1,10 @@
 kind: dask
 metadata:
   name: parquet-to-dask-airlines
-  hash: acd7792a3b2f27b2e50aadca7da3d600e5445b90
+  hash: edf308d7e79302ca72678166758fd6be805b0f8e
   project: default
 spec:
-  command: /User/repos/demos/dask/parquet-to-dask-airlines.py
+  command: /User/repos/demos/dask/code/parquet-to-dask-airlines.py
   args: []
   image: yjbds/mlrun-dask:dev
   volumes: []

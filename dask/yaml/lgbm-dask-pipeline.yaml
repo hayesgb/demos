@@ -1,0 +1,638 @@
+"apiVersion": |-
+  argoproj.io/v1alpha1
+"kind": |-
+  Workflow
+"metadata":
+  "annotations":
+    "pipelines.kubeflow.org/pipeline_spec": |-
+      {"description": "Shows how to use mlrun with dask and a booster model.", "inputs": [{"default": "[3, 4, 5]", "name": "max_depth", "optional": true}, {"default": "[0.01, 0.1, 0.5]", "name": "learning_rate", "optional": true}], "name": "My Dask-LiightGBM training pipeline"}
+  "generateName": |-
+    my-dask-liightgbm-training-pipeline-
+"spec":
+  "arguments":
+    "parameters":
+    - "name": |-
+        max_depth
+      "value": |-
+        [3, 4, 5]
+    - "name": |-
+        learning_rate
+      "value": |-
+        [0.01, 0.1, 0.5]
+  "entrypoint": |-
+    my-dask-liightgbm-training-pipeline
+  "serviceAccountName": |-
+    pipeline-runner
+  "templates":
+  - "container":
+      "command":
+      - |-
+        python
+      - |-
+        -m
+      - |-
+        mlrun
+      - |-
+        run
+      - |-
+        --kfp
+      - |-
+        --from-env
+      - |-
+        --workflow
+      - |-
+        {{workflow.uid}}
+      - |-
+        --name
+      - |-
+        acquire_remote
+      - |-
+        -p
+      - |-
+        target_path=/User/repos/demos/dask/dataset
+      - |-
+        -p
+      - |-
+        name=airlines.pqt
+      - |-
+        -p
+      - |-
+        key=airlines
+      - |-
+        -p
+      - |-
+        archive_url=https://s3.amazonaws.com/h2o-airlines-unpacked/allyears.csv
+      - |-
+        -p
+      - |-
+        dataset=partitions
+      - |-
+        -p
+      - |-
+        part_cols=['Year', 'Month']
+      - |-
+        -p
+      - |-
+        encoding=latin-1
+      - |-
+        -p
+      - |-
+        inc_cols=['Year', 'Month', 'DayofMonth', 'DayOfWeek', 'CRSDepTime', 'UniqueCarrier', 'ArrDelay', 'Origin', 'Dest', 'Distance']
+      - |-
+        -p
+      - |-
+        dtype={'Distance': 'float32', 'ArrDelay': 'float64', 'CRSDepTime': 'float32'}
+      - |-
+        -o
+      - |-
+        airlines
+      - |-
+        --handler
+      - |-
+        arc_to_parquet
+      - |-
+        --runtime
+      - |-
+        {'kind': 'job', 'metadata': {'name': 'arc_to_parquet', 'hash': '8df5303ea33a15cb97fb3e8e0d5e3e0686040e58', 'project': 'default'}, 'spec': {'command': '/User/repos/demos/dask/arc_to_parquet.py', 'args': [], 'image': 'yjbds/mlrun-base:dev', 'volumes': [{'flexVolume': {'driver': 'v3io/fuse', 'options': {'accessKey': 'eaed2dc3-4fe8-4ba0-a490-13e505cdce9a', 'container': 'users', 'subPath': '/admin'}}, 'name': 'v3io'}], 'volume_mounts': [{'mountPath': '/User', 'name': 'v3io'}], 'env': [{'name': 'V3IO_API', 'value': 'v3io-webapi.default-tenant.svc:8081'}, {'name': 'V3IO_USERNAME', 'value': 'admin'}, {'name': 'V3IO_ACCESS_KEY', 'value': 'eaed2dc3-4fe8-4ba0-a490-13e505cdce9a'}], 'description': '', 'build': {'base_image': 'yjbds/mlrun-base:dev', 'commands': []}}}
+      - |-
+        --out-path
+      - |-
+        /User/repos/demos/dask/artifacts
+      - |-
+        --image
+      - |-
+        yjbds/mlrun-base:dev
+      - ""
+      "env":
+      - "name": |-
+          MLRUN_DBPATH
+        "value": |-
+          http://mlrun-api:8080
+      - "name": |-
+          V3IO_API
+        "value": |-
+          v3io-webapi.default-tenant.svc:8081
+      - "name": |-
+          V3IO_USERNAME
+        "value": |-
+          admin
+      - "name": |-
+          V3IO_ACCESS_KEY
+        "value": |-
+          eaed2dc3-4fe8-4ba0-a490-13e505cdce9a
+      "image": |-
+        mlrun/mlrun:0.4.4
+      "volumeMounts":
+      - "mountPath": |-
+          /User
+        "name": |-
+          v3io
+    "name": |-
+      acquire-remote
+    "outputs":
+      "artifacts":
+      - "name": |-
+          mlpipeline-ui-metadata
+        "path": |-
+          /mlpipeline-ui-metadata.json
+      - "name": |-
+          mlpipeline-metrics
+        "path": |-
+          /mlpipeline-metrics.json
+      - "name": |-
+          acquire-remote-airlines
+        "path": |-
+          /tmp/airlines
+      "parameters":
+      - "name": |-
+          acquire-remote-airlines
+        "valueFrom":
+          "path": |-
+            /tmp/airlines
+    "volumes":
+    - "flexVolume":
+        "driver": |-
+          v3io/fuse
+        "options":
+          "accessKey": |-
+            eaed2dc3-4fe8-4ba0-a490-13e505cdce9a
+          "container": |-
+            users
+          "subPath": |-
+            /admin
+      "name": |-
+        v3io
+  - "container":
+      "command":
+      - |-
+        python
+      - |-
+        -m
+      - |-
+        mlrun
+      - |-
+        deploy
+      - |-
+        {'kind': 'remote', 'metadata': {'name': 'flight-delay-server', 'project': 'default'}, 'spec': {'command': '', 'args': [], 'image': '', 'description': '', 'volumes': [{'flexVolume': {'driver': 'v3io/fuse', 'options': {'accessKey': 'eaed2dc3-4fe8-4ba0-a490-13e505cdce9a', 'container': 'users', 'subPath': '/admin'}}, 'name': 'v3io'}], 'volume_mounts': [{'mountPath': '/User', 'name': 'v3io'}], 'env': [{'name': 'MODEL_CLASS', 'value': 'ClassifierModel'}, {'name': 'ENABLE_EXPLAINER', 'value': 'False'}, {'name': 'V3IO_API', 'value': 'v3io-webapi.default-tenant.svc:8081'}, {'name': 'V3IO_USERNAME', 'value': 'admin'}, {'name': 'V3IO_ACCESS_KEY', 'value': 'eaed2dc3-4fe8-4ba0-a490-13e505cdce9a'}], 'config': {'spec.triggers.http': {'kind': 'http', 'maxWorkers': 8, 'attributes': {'ingresses': {}}, 'annotations': {}}}, 'base_spec': {'apiVersion': 'nuclio.io/v1', 'kind': 'nuclio:serving', 'metadata': {'annotations': {'nuclio.io/generated_by': 'function generated at 11-02-2020 by admin from /User/repos/demos/dask/lgbm_server.ipynb'}, 'labels': {}, 'name': 'flight-delay-server'}, 'spec': {'build': {'commands': ['pip install -U -q kfserving', 'pip install -U -q azure', 'pip install -U -q mlrun'], 'functionSourceCode': 'IyBHZW5lcmF0ZWQgYnkgbnVjbGlvLmV4cG9ydC5OdWNsaW9FeHBvcnRlciBvbiAyMDIwLTAyLTExIDE2OjQ4CgppbXBvcnQga2ZzZXJ2aW5nCmltcG9ydCBvcwppbXBvcnQgbnVtcHkgYXMgbnAKZnJvbSBjbG91ZHBpY2tsZSBpbXBvcnQgbG9hZAoKVEFSR0VUX1BBVEggPSAnL1VzZXIvcmVwb3MvZGVtb3MvZGFzay9hcnRpZmFjdHMnCk1PREVMX0ZJTEUgPSAnbGdibS1tb2RlbC5wa2wnCgpjbGFzcyBDbGFzc2lmaWVyTW9kZWwoa2ZzZXJ2aW5nLktGTW9kZWwpOgogICAgZGVmIF9faW5pdF9fKHNlbGYsIG5hbWU6IHN0ciwgbW9kZWxfZGlyOiBzdHIsIG1vZGVsID0gTm9uZSk6CiAgICAgICAgc3VwZXIoKS5fX2luaXRfXyhuYW1lKQogICAgICAgIHNlbGYubmFtZSA9IG5hbWUKICAgICAgICBzZWxmLm1vZGVsX2RpciA9IG1vZGVsX2RpcgogICAgICAgIGlmIG5vdCBtb2RlbCBpcyBOb25lOgogICAgICAgICAgICBzZWxmLmNsYXNzaWZpZXIgPSBtb2RlbAogICAgICAgICAgICBzZWxmLnJlYWR5ID0gVHJ1ZQoKICAgIGRlZiBsb2FkKHNlbGYpOgogICAgICAgIG1vZGVsX2ZpbGUgPSBvcy5wYXRoLmpvaW4oCiAgICAgICAgICAgIGtmc2VydmluZy5TdG9yYWdlLmRvd25sb2FkKHNlbGYubW9kZWxfZGlyKSwgTU9ERUxfRklMRSkKICAgICAgICBzZWxmLmNsYXNzaWZpZXIgPSBsb2FkKG9wZW4obW9kZWxfZmlsZSwgJ3JiJykpCiAgICAgICAgc2VsZi5yZWFkeSA9IFRydWUKCiAgICBkZWYgcHJlZGljdChzZWxmLCBib2R5KToKICAgICAgICB0cnk6CiAgICAgICAgICAgIGZlYXRzID0gbnAuYXNhcnJheShib2R5WydpbnN0YW5jZXMnXSkKICAgICAgICAgICAgcmVzdWx0OiBucC5uZGFycmF5ID0gc2VsZi5jbGFzc2lmaWVyLnByZWRpY3QoZmVhdHMpCiAgICAgICAgICAgIHJldHVybiByZXN1bHQudG9saXN0KCkKICAgICAgICBleGNlcHQgRXhjZXB0aW9uIGFzIGU6CiAgICAgICAgICAgIHJhaXNlIEV4Y2VwdGlvbigiRmFpbGVkIHRvIHByZWRpY3QgJXMiICUgZSkKCgpmcm9tIG1scnVuLnJ1bnRpbWVzIGltcG9ydCBudWNsaW9faW5pdF9ob29rCmRlZiBpbml0X2NvbnRleHQoY29udGV4dCk6CiAgICBudWNsaW9faW5pdF9ob29rKGNvbnRleHQsIGdsb2JhbHMoKSwgJ3NlcnZpbmcnKQoKZGVmIGhhbmRsZXIoY29udGV4dCwgZXZlbnQpOgogICAgcmV0dXJuIGNvbnRleHQubWxydW5faGFuZGxlcihjb250ZXh0LCBldmVudCkK', 'noBaseImagesPull': True}, 'env': [{'name': 'MODEL_CLASS', 'value': 'ClassifierModel'}], 'handler': 'lgbm_server:handler', 'runtime': 'python:3.6', 'volumes': []}}, 'source': '', 'function_kind': 'serving'}}
+      - |-
+        -p
+      - |-
+        dask
+      - |-
+        -m
+      - |-
+        dask_v1={{inputs.parameters.train-lgbm-model}}
+      "image": |-
+        mlrun/mlrun:0.4.4
+    "inputs":
+      "parameters":
+      - "name": |-
+          train-lgbm-model
+    "name": |-
+      deploy-flight-delay-server
+    "outputs":
+      "artifacts":
+      - "name": |-
+          deploy-flight-delay-server-endpoint
+        "path": |-
+          /tmp/output
+  - "container":
+      "command":
+      - |-
+        python
+      - |-
+        -m
+      - |-
+        mlrun
+      - |-
+        run
+      - |-
+        --kfp
+      - |-
+        --from-env
+      - |-
+        --workflow
+      - |-
+        {{workflow.uid}}
+      - |-
+        --name
+      - |-
+        load_dask
+      - |-
+        -p
+      - |-
+        sample=0.02
+      - |-
+        -p
+      - |-
+        shards=8
+      - |-
+        -p
+      - |-
+        threads_per=8
+      - |-
+        -p
+      - |-
+        memory_limit=5GB
+      - |-
+        -p
+      - |-
+        dask_key=airlines
+      - |-
+        -p
+      - |-
+        target_path=/User/repos/demos/dask/artifacts
+      - |-
+        -i
+      - |-
+        parquet_url={{inputs.parameters.acquire-remote-airlines}}
+      - |-
+        -o
+      - |-
+        scheduler
+      - |-
+        --handler
+      - |-
+        parquet_to_dask
+      - |-
+        --runtime
+      - |-
+        {'kind': 'dask', 'metadata': {'name': 'parquet-to-dask-airlines', 'hash': 'acd7792a3b2f27b2e50aadca7da3d600e5445b90', 'project': 'default'}, 'spec': {'command': '/User/repos/demos/dask/parquet-to-dask-airlines.py', 'args': [], 'image': 'yjbds/mlrun-dask:dev', 'volumes': [], 'volume_mounts': [], 'env': [], 'build': {'base_image': 'yjbds/mlrun-dask:dev', 'commands': []}, 'description': '', 'replicas': 8, 'image_pull_policy': 'Always', 'remote': True, 'service_type': 'NodePort', 'nthreads': 1, 'min_replicas': 0, 'max_replicas': 8}}
+      - |-
+        --out-path
+      - |-
+        /User/repos/demos/dask/artifacts
+      - |-
+        --image
+      - |-
+        yjbds/mlrun-dask:dev
+      - ""
+      "env":
+      - "name": |-
+          MLRUN_DBPATH
+        "value": |-
+          http://mlrun-api:8080
+      - "name": |-
+          V3IO_API
+        "value": |-
+          v3io-webapi.default-tenant.svc:8081
+      - "name": |-
+          V3IO_USERNAME
+        "value": |-
+          admin
+      - "name": |-
+          V3IO_ACCESS_KEY
+        "value": |-
+          eaed2dc3-4fe8-4ba0-a490-13e505cdce9a
+      "image": |-
+        mlrun/mlrun:0.4.4
+      "volumeMounts":
+      - "mountPath": |-
+          /User
+        "name": |-
+          v3io
+    "inputs":
+      "parameters":
+      - "name": |-
+          acquire-remote-airlines
+    "name": |-
+      load-dask
+    "outputs":
+      "artifacts":
+      - "name": |-
+          mlpipeline-ui-metadata
+        "path": |-
+          /mlpipeline-ui-metadata.json
+      - "name": |-
+          mlpipeline-metrics
+        "path": |-
+          /mlpipeline-metrics.json
+      - "name": |-
+          load-dask-scheduler
+        "path": |-
+          /tmp/scheduler
+      "parameters":
+      - "name": |-
+          load-dask-scheduler
+        "valueFrom":
+          "path": |-
+            /tmp/scheduler
+    "volumes":
+    - "flexVolume":
+        "driver": |-
+          v3io/fuse
+        "options":
+          "accessKey": |-
+            eaed2dc3-4fe8-4ba0-a490-13e505cdce9a
+          "container": |-
+            users
+          "subPath": |-
+            /admin
+      "name": |-
+        v3io
+  - "dag":
+      "tasks":
+      - "name": |-
+          acquire-remote
+        "template": |-
+          acquire-remote
+      - "arguments":
+          "parameters":
+          - "name": |-
+              train-lgbm-model
+            "value": |-
+              {{tasks.train.outputs.parameters.train-lgbm-model}}
+        "dependencies":
+        - |-
+          train
+        "name": |-
+          deploy-flight-delay-server
+        "template": |-
+          deploy-flight-delay-server
+      - "arguments":
+          "parameters":
+          - "name": |-
+              acquire-remote-airlines
+            "value": |-
+              {{tasks.acquire-remote.outputs.parameters.acquire-remote-airlines}}
+        "dependencies":
+        - |-
+          acquire-remote
+        "name": |-
+          load-dask
+        "template": |-
+          load-dask
+      - "arguments":
+          "parameters":
+          - "name": |-
+              load-dask-scheduler
+            "value": |-
+              {{tasks.load-dask.outputs.parameters.load-dask-scheduler}}
+        "dependencies":
+        - |-
+          load-dask
+        "name": |-
+          splitter
+        "template": |-
+          splitter
+      - "arguments":
+          "parameters":
+          - "name": |-
+              load-dask-scheduler
+            "value": |-
+              {{tasks.load-dask.outputs.parameters.load-dask-scheduler}}
+        "dependencies":
+        - |-
+          load-dask
+        "name": |-
+          train
+        "template": |-
+          train
+    "name": |-
+      my-dask-liightgbm-training-pipeline
+  - "container":
+      "command":
+      - |-
+        python
+      - |-
+        -m
+      - |-
+        mlrun
+      - |-
+        run
+      - |-
+        --kfp
+      - |-
+        --from-env
+      - |-
+        --workflow
+      - |-
+        {{workflow.uid}}
+      - |-
+        --name
+      - |-
+        splitter
+      - |-
+        -i
+      - |-
+        dask_client={{inputs.parameters.load-dask-scheduler}}
+      - |-
+        -o
+      - |-
+        header
+      - |-
+        -o
+      - |-
+        test_set
+      - |-
+        --handler
+      - |-
+        train_valid_test
+      - |-
+        --runtime
+      - |-
+        {'kind': 'job', 'metadata': {'name': 'train-valid-test-splitter-airlines', 'hash': '00304f8a70411d18cd446f9b8fc3ae0b69c08ede', 'project': 'default'}, 'spec': {'command': '/User/repos/demos/dask/train-valid-test-splitter-airlines.py', 'args': [], 'image': 'yjbds/mlrun-dask:dev', 'volumes': [{'flexVolume': {'driver': 'v3io/fuse', 'options': {'accessKey': 'eaed2dc3-4fe8-4ba0-a490-13e505cdce9a', 'container': 'users', 'subPath': '/admin'}}, 'name': 'v3io'}], 'volume_mounts': [{'mountPath': '/User', 'name': 'v3io'}], 'env': [{'name': 'V3IO_API', 'value': 'v3io-webapi.default-tenant.svc:8081'}, {'name': 'V3IO_USERNAME', 'value': 'admin'}, {'name': 'V3IO_ACCESS_KEY', 'value': 'eaed2dc3-4fe8-4ba0-a490-13e505cdce9a'}], 'description': '', 'build': {'base_image': 'yjbds/mlrun-dask:dev', 'commands': []}}}
+      - |-
+        --out-path
+      - |-
+        /User/repos/demos/dask/artifacts
+      - |-
+        --image
+      - |-
+        yjbds/mlrun-dask:dev
+      - ""
+      "env":
+      - "name": |-
+          MLRUN_DBPATH
+        "value": |-
+          http://mlrun-api:8080
+      - "name": |-
+          V3IO_API
+        "value": |-
+          v3io-webapi.default-tenant.svc:8081
+      - "name": |-
+          V3IO_USERNAME
+        "value": |-
+          admin
+      - "name": |-
+          V3IO_ACCESS_KEY
+        "value": |-
+          eaed2dc3-4fe8-4ba0-a490-13e505cdce9a
+      "image": |-
+        mlrun/mlrun:0.4.4
+      "volumeMounts":
+      - "mountPath": |-
+          /User
+        "name": |-
+          v3io
+    "inputs":
+      "parameters":
+      - "name": |-
+          load-dask-scheduler
+    "name": |-
+      splitter
+    "outputs":
+      "artifacts":
+      - "name": |-
+          mlpipeline-ui-metadata
+        "path": |-
+          /mlpipeline-ui-metadata.json
+      - "name": |-
+          mlpipeline-metrics
+        "path": |-
+          /mlpipeline-metrics.json
+      - "name": |-
+          splitter-header
+        "path": |-
+          /tmp/header
+      - "name": |-
+          splitter-test_set
+        "path": |-
+          /tmp/test_set
+    "volumes":
+    - "flexVolume":
+        "driver": |-
+          v3io/fuse
+        "options":
+          "accessKey": |-
+            eaed2dc3-4fe8-4ba0-a490-13e505cdce9a
+          "container": |-
+            users
+          "subPath": |-
+            /admin
+      "name": |-
+        v3io
+  - "container":
+      "command":
+      - |-
+        python
+      - |-
+        -m
+      - |-
+        mlrun
+      - |-
+        run
+      - |-
+        --kfp
+      - |-
+        --from-env
+      - |-
+        --workflow
+      - |-
+        {{workflow.uid}}
+      - |-
+        --name
+      - |-
+        train
+      - |-
+        -p
+      - |-
+        train_set=('xtrain', 'ytrain')
+      - |-
+        -p
+      - |-
+        valid_set=('xvalid', 'yvalid')
+      - |-
+        -p
+      - |-
+        target_path=/User/repos/demos/dask/artifacts
+      - |-
+        -p
+      - |-
+        name=lgbm-model.pkl
+      - |-
+        -p
+      - |-
+        key=lgbm-model
+      - |-
+        -p
+      - |-
+        params={'max_depth': 3, 'learning_rate': 0.1, 'n_estimators': 3, 'reg_alpha': 0.0, 'reg_lambda': 0.0, 'random_state': 1, 'tree_learner': 'data', 'silent': False}
+      - |-
+        -i
+      - |-
+        dask_client={{inputs.parameters.load-dask-scheduler}}
+      - |-
+        -o
+      - |-
+        lgbm-model
+      - |-
+        --handler
+      - |-
+        clf_lgbm_dask
+      - |-
+        --runtime
+      - |-
+        {'kind': 'job', 'metadata': {'name': 'clf_lgbm_dask', 'hash': '89383c9df7adfba0520ec4e00bc8b18d03f14092', 'project': 'default'}, 'spec': {'command': '/User/repos/demos/dask/clf_lgbm_dask.py', 'args': [], 'image': 'yjbds/mlrun-dask:dev', 'volumes': [{'flexVolume': {'driver': 'v3io/fuse', 'options': {'accessKey': 'eaed2dc3-4fe8-4ba0-a490-13e505cdce9a', 'container': 'users', 'subPath': '/admin'}}, 'name': 'v3io'}], 'volume_mounts': [{'mountPath': '/User', 'name': 'v3io'}], 'env': [{'name': 'V3IO_API', 'value': 'v3io-webapi.default-tenant.svc:8081'}, {'name': 'V3IO_USERNAME', 'value': 'admin'}, {'name': 'V3IO_ACCESS_KEY', 'value': 'eaed2dc3-4fe8-4ba0-a490-13e505cdce9a'}], 'description': '', 'build': {'base_image': 'yjbds/mlrun-dask:dev', 'commands': []}}}
+      - |-
+        --out-path
+      - |-
+        /User/repos/demos/dask/artifacts
+      - |-
+        --image
+      - |-
+        yjbds/mlrun-dask:dev
+      - ""
+      "env":
+      - "name": |-
+          MLRUN_DBPATH
+        "value": |-
+          http://mlrun-api:8080
+      - "name": |-
+          V3IO_API
+        "value": |-
+          v3io-webapi.default-tenant.svc:8081
+      - "name": |-
+          V3IO_USERNAME
+        "value": |-
+          admin
+      - "name": |-
+          V3IO_ACCESS_KEY
+        "value": |-
+          eaed2dc3-4fe8-4ba0-a490-13e505cdce9a
+      "image": |-
+        mlrun/mlrun:0.4.4
+      "volumeMounts":
+      - "mountPath": |-
+          /User
+        "name": |-
+          v3io
+    "inputs":
+      "parameters":
+      - "name": |-
+          load-dask-scheduler
+    "name": |-
+      train
+    "outputs":
+      "artifacts":
+      - "name": |-
+          mlpipeline-ui-metadata
+        "path": |-
+          /mlpipeline-ui-metadata.json
+      - "name": |-
+          mlpipeline-metrics
+        "path": |-
+          /mlpipeline-metrics.json
+      - "name": |-
+          train-lgbm-model
+        "path": |-
+          /tmp/lgbm-model
+      "parameters":
+      - "name": |-
+          train-lgbm-model
+        "valueFrom":
+          "path": |-
+            /tmp/lgbm-model
+    "volumes":
+    - "flexVolume":
+        "driver": |-
+          v3io/fuse
+        "options":
+          "accessKey": |-
+            eaed2dc3-4fe8-4ba0-a490-13e505cdce9a
+          "container": |-
+            users
+          "subPath": |-
+            /admin
+      "name": |-
+        v3io

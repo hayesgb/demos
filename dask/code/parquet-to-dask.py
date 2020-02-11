@@ -29,7 +29,7 @@ from typing import IO, AnyStr, Union, List, Optional
 def parquet_to_dask(
     context: MLClientCtx,
     parquet_url: Union[DataItem, str, Path, IO[AnyStr]],
-    sample = 0.3,
+    sample: Optional[Union[float, int]] = None,
     shards: int = 4,
     threads_per: int = 4,
     memory_limit: str = '2GB',
@@ -49,7 +49,8 @@ def parquet_to_dask(
     :param context:         the function context
     :param parquet_url:     url of the parquet file or partitioned dataset as either
                             artifact DataItem, string, or path object (see pandas read_csv)
-    :param sample:           sample size as fraction 0.0-1.0
+    :param sample:          (None) sample size as fraction 0.0-1.0, if None
+                            or 1 then the entire sample
     :param shards:          number of workers to launch
     :param threads_per:     number of threads per worker
     """
@@ -65,9 +66,11 @@ def parquet_to_dask(
         dask_client = Client(cluster)
 
     context.logger.info(dask_client)
- 
-    df = dd.read_parquet(parquet_url).sample(frac=sample)
-    df = df.sample(frac=sample)
+    
+    if sample is None or int(sample) == 1:
+        df = dd.read_parquet(parquet_url)
+    else:
+        df = dd.read_parquet(parquet_url).sample(frac=sample)
 
     context.logger.info(f'column header {df.columns.values}')
     

@@ -1,10 +1,10 @@
 kind: job
 metadata:
   name: clf_lgbm_dask
-  hash: 89383c9df7adfba0520ec4e00bc8b18d03f14092
+  hash: 522464664a8acb99257284aa0c8effe90b104bb0
   project: default
 spec:
-  command: /User/repos/demos/dask/clf_lgbm_dask.py
+  command: /User/repos/demos/dask/code/clf_lgbm_dask.py
   args: []
   image: yjbds/mlrun-dask:dev
   volumes: []

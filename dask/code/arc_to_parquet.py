@@ -73,13 +73,15 @@ def arc_to_parquet(
         name += ".pqt"
     
     if dataset is not None:
-        os.makedirs(os.path.join(target_path, dataset), exist_ok=True)
         dest_path = os.path.join(target_path, dataset)
+        exists = os.path.isdir(dest_path)
+        os.makedirs(dest_path, exist_ok=True)
     else:
-        os.makedirs(os.path.join(target_path), exist_ok=True)
         dest_path = os.path.join(target_path, name)
+        exists = os.path.isfile(dest_path)
+        os.makedirs(os.path.join(target_path), exist_ok=True)
         
-    if not os.path.isfile(dest_path):
+    if not exists:
         context.logger.info("destination file does not exist, downloading")
         pqwriter = None
         for i, df in enumerate(pd.read_csv(archive_url, 

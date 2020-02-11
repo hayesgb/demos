@@ -61,14 +61,14 @@ def clf_lgbm_dask(
     yvalid = dask_client.datasets[valid_set[1]]
     
     try:
-        bst = dlgbm.train(dask_client,
+        clf = dlgbm.train(dask_client,
                           xtrain,
                           ytrain,
                           model_factory=lightgbm.LGBMClassifier,
                           weight=None,
                           params=params)
         filepath = os.path.join(target_path, name)
-        dump(bst, open(filepath, 'wb'))
+        dump(clf, open(filepath, 'wb'))
         context.log_artifact(key, target_path=filepath)
     except Exception as e:
         print(f'FAILED {e}')

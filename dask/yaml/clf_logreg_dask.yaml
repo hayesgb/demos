@@ -1,10 +1,10 @@
 kind: job
 metadata:
-  name: describe
-  hash: 0033fb1a7bce04fd40d91e9f4def94e333a6b987
+  name: clf_logreg_dask
+  hash: 802970ceff8e91f8f1cc3815de20a09c19666f87
   project: default
 spec:
-  command: /User/repos/demos/dask/describe.py
+  command: /User/repos/demos/dask/code/clf_logreg_dask.py
   args: []
   image: yjbds/mlrun-dask:dev
   volumes: []
@@ -12,5 +12,5 @@ spec:
   env: []
   description: ''
   build:
-    base_image: yjbds/mlrun-dask:dev
+    image: yjbds/mlrun-dask:dev
     commands: []
