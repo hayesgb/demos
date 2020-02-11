@@ -49,8 +49,9 @@ def table_summary(
     dask_client = Client(scheduler_file=scheduler_file)
     df = dask_client.get_dataset(dask_key)
     
-    dscr = df.describe().compute()
+    
     filepath = os.path.join(target_path, name)
+    dscr = df.describe().compute()
     dscr.to_csv(filepath, index=False)
     context.log_artifact(key, target_path=filepath)
     

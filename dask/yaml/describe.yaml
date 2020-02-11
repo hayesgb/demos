@@ -1,0 +1,16 @@
+kind: job
+metadata:
+  name: describe
+  hash: 0033fb1a7bce04fd40d91e9f4def94e333a6b987
+  project: default
+spec:
+  command: /User/repos/demos/dask/describe.py
+  args: []
+  image: yjbds/mlrun-dask:dev
+  volumes: []
+  volume_mounts: []
+  env: []
+  description: ''
+  build:
+    image: yjbds/mlrun-dask:dev
+    commands: []

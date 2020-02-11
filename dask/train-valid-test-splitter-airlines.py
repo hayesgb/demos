@@ -133,6 +133,6 @@ def train_valid_test_splitter(
     test_set = test_set.reset_index()
     
     fp = os.path.join(target_path, 'test_set.pqt')
-    dd.to_parquet(test_set, fp, compute=True)
+    dd.to_parquet(test_set, fp, append=False, compute=True)
     context.log_artifact('test_set', target_path=fp)
     

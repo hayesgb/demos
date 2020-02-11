@@ -13,6 +13,7 @@
 # limitations under the License.
 import os
 import json
+from cloudpickle import dump
 from pathlib import Path
 import numpy as np
 import pandas as pd
@@ -58,8 +59,6 @@ def clf_lgbm_dask(
     
     xvalid = dask_client.datasets[valid_set[0]]
     yvalid = dask_client.datasets[valid_set[1]]
-    
-    
     
     try:
         bst = dlgbm.train(dask_client,

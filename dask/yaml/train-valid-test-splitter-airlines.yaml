@@ -1,0 +1,16 @@
+kind: job
+metadata:
+  name: train-valid-test-splitter-airlines
+  hash: 00304f8a70411d18cd446f9b8fc3ae0b69c08ede
+  project: default
+spec:
+  command: /User/repos/demos/dask/train-valid-test-splitter-airlines.py
+  args: []
+  image: yjbds/mlrun-dask:dev
+  volumes: []
+  volume_mounts: []
+  env: []
+  description: ''
+  build:
+    image: yjbds/mlrun-dask:dev
+    commands: []

@@ -1,0 +1,16 @@
+kind: job
+metadata:
+  name: function
+  hash: 8d918f77396e6889fb4ff589f71b8762debcbf3c
+  project: default
+spec:
+  command: /User/repos/demos/dask/arc_to_parquet.py
+  args: []
+  image: yjbds/mlrun-base:dev
+  volumes: []
+  volume_mounts: []
+  env: []
+  description: retrieve archive table and save as parquet file
+  build:
+    base_image: yjbds/mlrun-base:dev
+    commands: []

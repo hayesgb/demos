@@ -1,0 +1,16 @@
+kind: job
+metadata:
+  name: clf_lgbm_dask
+  hash: 89383c9df7adfba0520ec4e00bc8b18d03f14092
+  project: default
+spec:
+  command: /User/repos/demos/dask/clf_lgbm_dask.py
+  args: []
+  image: yjbds/mlrun-dask:dev
+  volumes: []
+  volume_mounts: []
+  env: []
+  description: ''
+  build:
+    image: yjbds/mlrun-dask:dev
+    commands: []
