@@ -37,7 +37,15 @@ def clf_logreg_dask(
     target_path: str,
     name: str,
     key: str,
-    params
+    params : {
+        'fit_intercept': True,
+        'penalty':       'l2',
+        'tol':           0.0001,
+        'C':             1.0,
+        'solver':        'admm',
+        'max_iter':      100,
+        'solver_kwargs': None
+    }
 ) -> None:
     """Train Logistic Regression classifier
     
@@ -59,22 +67,16 @@ def clf_logreg_dask(
     xvalid = dask_client.datasets[valid_set[0]]
     yvalid = dask_client.datasets[valid_set[1]]
     
-#     try:
-    clf = LogisticRegression(fit_intercept=False)
-#                                penalty='l2',
-#                                tol=0.0001,
-#                                C=1.0,
-#                                fit_intercept=True,
-#                                class_weight=None,
-#                                random_state=None, # np.random's
-#                                solver='admm',
-#                                max_iter=100,
-#                                solver_kwargs=None)
-        # coef_, intercept_
-    clf.fit(xtrain.values, ytrain.values)
+    try:
+        clf = LogisticRegression(**params)
+        clf.fit(xtrain.values, ytrain.values)
 
-    filepath = os.path.join(target_path, name)
-    dump(clf, open(filepath, 'wb'))
-    context.log_artifact(key, target_path=filepath)
-#     except Exception as e:
-#         print(f'FAILED {e}')
+        print(clf)
+        print(coef_)
+        print(intercept_)
+
+        filepath = os.path.join(target_path, name)
+        dump(clf, open(filepath, 'wb'))
+        context.log_artifact(key, target_path=filepath)
+    except Exception as e:
+        print(f'FAILED {e}')

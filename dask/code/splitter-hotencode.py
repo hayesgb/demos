@@ -29,7 +29,7 @@ from mlrun.artifacts import ChartArtifact, TableArtifact, PlotArtifact
 import warnings
 warnings.simplefilter(action='ignore', category=FutureWarning)
 
-def train_valid_test_splitter(
+def splitter_hotencode(
     context: Optional[MLClientCtx] = None,
     dask_client: Union[DataItem, str] = '',
     dask_key: str = '',
@@ -84,23 +84,17 @@ def train_valid_test_splitter(
     feature_classes = dict()
     
     # Category encoding
-    #before_encoding_shape = features.shape[1]
+    before_encoding_shape = features.shape[1]
     
-    for cat in categories:
-        le = LabelEncoder()
-        features[cat] = le.fit_transform(features[cat])
-        fp = os.path.join(target_path, cat+'-encoding.pkl')
-        # save this encoder
-        dump(le, open(fp, 'wb'))
+    le = OneHotEncoder()
+    features = le.fit_transform(features)
+    fp = os.path.join(target_path, 'hot-encoding.pkl')
+    # save this encoder
+    dump(le, open(fp, 'wb'))
     
-    #after_encoding_shape = features.shape[1]
-    #context.logger.info(f'N FEATURES:\nbefore {before_encoding_shape}\nafter  {after_encoding_shape}')
-    
-    # One-hot encoding - todo
-    
-    
-    
-    
+    after_encoding_shape = features.shape[1]
+    context.logger.info(f'N FEATURES:\nbefore {before_encoding_shape}\nafter  {after_encoding_shape}')
+
     # splits
     x, xtest, y, ytest = train_test_split(
         features,

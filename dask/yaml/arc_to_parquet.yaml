@@ -1,16 +1,16 @@
 kind: job
 metadata:
   name: arc_to_parquet
-  hash: 3867c95680b620953c4087600f6615717d5b6bab
+  hash: 65486e9ab6c6e1659062f35539c530b99627ebe1
   project: default
 spec:
   command: /User/repos/demos/dask/code/arc_to_parquet.py
   args: []
-  image: yjbds/mlrun-base:dev
+  image: yjbds/mlrun-base:conda-test
   volumes: []
   volume_mounts: []
   env: []
   description: ''
   build:
-    image: yjbds/mlrun-base:dev
+    image: yjbds/mlrun-base:conda-test
     commands: []
