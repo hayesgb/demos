@@ -1,10 +1,10 @@
 kind: job
 metadata:
-  name: train-valid-test-splitter-airlines
-  hash: b2c73e59275fd00576068e1aa2e71b7a8b2ed393
+  name: clf_gbt_daal4py
+  hash: a0f8f2f8700a0cea50324fd8f269f5d295f6d3f3
   project: default
 spec:
-  command: /User/repos/demos/dask/code/train-valid-test-splitter-airlines.py
+  command: /User/repos/demos/dask/code/clf_gbt_daal4py.py
   args: []
   image: yjbds/mlrun-dask:dev
   volumes: []

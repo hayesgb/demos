@@ -1,10 +1,10 @@
 kind: job
 metadata:
-  name: describe
-  hash: dc403635a9d553ec83302dbc7f8aa0baf29e7f6d
+  name: train-valid-test-splitter
+  hash: 030843942525017287b28338ea48b1eed3955df3
   project: default
 spec:
-  command: /User/repos/demos/dask/code/describe.py
+  command: /User/repos/demos/dask/code/train-valid-test-splitter.py
   args: []
   image: yjbds/mlrun-dask:dev
   volumes: []
