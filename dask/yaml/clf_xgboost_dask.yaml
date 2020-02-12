@@ -1,0 +1,16 @@
+kind: job
+metadata:
+  name: clf_xgboost_dask
+  hash: cca27d04c2153c6c9dfdce2c366201d3df0f67c4
+  project: default
+spec:
+  command: /User/repos/demos/dask/code/clf_xgboost_dask.py
+  args: []
+  image: yjbds/mlrun-dask:dev
+  volumes: []
+  volume_mounts: []
+  env: []
+  description: ''
+  build:
+    image: yjbds/mlrun-dask:dev
+    commands: []

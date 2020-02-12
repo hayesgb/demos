@@ -29,7 +29,7 @@ from mlrun.artifacts import ChartArtifact, TableArtifact, PlotArtifact
 
 from typing import IO, AnyStr, Union, List, Optional, Tuple
 
-def clf_xgboost_dask(
+def clf_logreg_xgb_dask(
     context: MLClientCtx,
     dask_client: Union[DataItem, str],
     train_set: Tuple[str, str],
@@ -37,7 +37,12 @@ def clf_xgboost_dask(
     target_path: str,
     name: str,
     key: str,
-    params
+    params : {
+        'silent':1,
+        'objective':'binary:logistic',
+        'booster':'gblinear',
+        'alpha': 0.0001,
+        'lambda': 1}
 ) -> None:
     """Train XGBoost classifier
     
@@ -59,9 +64,6 @@ def clf_xgboost_dask(
     xvalid = dask_client.datasets[valid_set[0]]
     yvalid = dask_client.datasets[valid_set[1]]
     
-    #dtrain = xgb.DMatrix(xtrain, label=ytrain)
-    #dvalid = xgb.DMatrix(xvalid, label=yvalid)
-
     try:
         clf = dxgb.train(dask_client, params, xtrain, ytrain)
 
