@@ -1,0 +1,16 @@
+kind: job
+metadata:
+  name: splitter-hotencode
+  hash: 1bdc1e6084ced0e9daaa045baf9f035ac18430d7
+  project: default
+spec:
+  command: /User/repos/demos/dask/code/splitter-hotencode.py
+  args: []
+  image: yjbds/mlrun-dask:dev
+  volumes: []
+  volume_mounts: []
+  env: []
+  description: ''
+  build:
+    image: yjbds/mlrun-dask:dev
+    commands: []

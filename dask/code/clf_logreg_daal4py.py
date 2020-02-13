@@ -59,15 +59,19 @@ def clf_logreg_daal4py(
     xvalid = dask_client.datasets[valid_set[0]]
     yvalid = dask_client.datasets[valid_set[1]]
     
-    clf = d4p.logistic_regression_training(nClasses=n_classes, interceptFlag=True)
-    
-    clf_result = clf.compute(xtrain.values.compute(),
-                             ytrain.values.compute())
+    try:
+        clf = d4p.logistic_regression_training(nClasses=n_classes, interceptFlag=True)
 
-    filepath = os.path.join(target_path, name)
-    dump(clf, open(filepath, 'wb'))
-    context.log_artifact(key, target_path=filepath)
-    
-    filepath = os.path.join(target_path, 'results-' + name)
-    dump(clf_result, open(filepath, 'wb'))
-    context.log_artifact(key, target_path=filepath)
+        clf_result = clf.compute(xtrain.values.compute(),
+                                 ytrain.values.compute())
+
+        filepath = os.path.join(target_path, name)
+        dump(clf, open(filepath, 'wb'))
+        context.log_artifact(key, target_path=filepath)
+
+        filepath = os.path.join(target_path, 'results-' + name)
+        dump(clf_result, open(filepath, 'wb'))
+        context.log_artifact(key, target_path=filepath)
+    except Exception as e:
+        print(f'FAILED {e}')
+        

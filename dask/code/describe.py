@@ -19,7 +19,7 @@ import pandas as pd
 
 import dask
 import dask.dataframe as dd
-from dask.distributed import Client
+from dask.distributed import Client, fire_and_forget
 
 from mlrun.execution import MLClientCtx
 from mlrun.datastore import DataItem
@@ -49,9 +49,16 @@ def table_summary(
     dask_client = Client(scheduler_file=scheduler_file)
     df = dask_client.get_dataset(dask_key)
     
+    def do_describe(table, filepath):
+        tbl = table.describe().compute()
+        dscr.to_csv(filepath, index=False)
+        context.log_artifact(key, target_path=filepath)
     
     filepath = os.path.join(target_path, name)
-    dscr = df.describe().compute()
-    dscr.to_csv(filepath, index=False)
-    context.log_artifact(key, target_path=filepath)
+    df = dask_client.scatter(df)   
+    dscr = dask_client.submit(do_describe, df, filepath)
+    fire_and_forget(dscr)
+    
+    
+    
     

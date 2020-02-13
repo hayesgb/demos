@@ -37,15 +37,7 @@ def clf_logreg_dask(
     target_path: str,
     name: str,
     key: str,
-    params : {
-        'fit_intercept': True,
-        'penalty':       'l2',
-        'tol':           0.0001,
-        'C':             1.0,
-        'solver':        'admm',
-        'max_iter':      100,
-        'solver_kwargs': None
-    }
+    params 
 ) -> None:
     """Train Logistic Regression classifier
     
@@ -68,8 +60,8 @@ def clf_logreg_dask(
     yvalid = dask_client.datasets[valid_set[1]]
     
     try:
-        clf = LogisticRegression(**params)
-        clf.fit(xtrain.values, ytrain.values)
+        clf = LogisticRegression(fit_intercept=True, solver='admm', max_iter=100)
+        clf.fit(xtrain.values.compute(), ytrain.values.compute())
 
         print(clf)
         print(coef_)

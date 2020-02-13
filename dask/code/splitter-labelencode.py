@@ -17,7 +17,7 @@ from dask.distributed import Client
 import lightgbm
 import dask_lightgbm.core as dlgbm
 
-from dask_ml.preprocessing import OneHotEncoder
+from dask_ml.preprocessing import LabelEncoder
 from dask_ml.model_selection import train_test_split
 
 from typing import IO, AnyStr, Union, List, Optional, Tuple 

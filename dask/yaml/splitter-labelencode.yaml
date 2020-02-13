@@ -1,0 +1,16 @@
+kind: job
+metadata:
+  name: splitter-labelencode
+  hash: 1ebd9e166686c5cca960c0cf93b7371c0e9cd28f
+  project: default
+spec:
+  command: /User/repos/demos/dask/code/splitter-labelencode.py
+  args: []
+  image: yjbds/mlrun-dask:dev
+  volumes: []
+  volume_mounts: []
+  env: []
+  description: ''
+  build:
+    image: yjbds/mlrun-dask:dev
+    commands: []

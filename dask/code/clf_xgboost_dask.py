@@ -59,9 +59,6 @@ def clf_xgboost_dask(
     xvalid = dask_client.datasets[valid_set[0]]
     yvalid = dask_client.datasets[valid_set[1]]
     
-    #dtrain = xgb.DMatrix(xtrain, label=ytrain)
-    #dvalid = xgb.DMatrix(xvalid, label=yvalid)
-
     try:
         clf = dxgb.train(dask_client, params, xtrain, ytrain)
 
