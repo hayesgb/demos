@@ -51,13 +51,14 @@ def table_summary(
     
     def do_describe(table, filepath):
         tbl = table.describe().compute()
-        dscr.to_csv(filepath, index=False)
+        tbl.to_csv(filepath, index=False)
         context.log_artifact(key, target_path=filepath)
     
     filepath = os.path.join(target_path, name)
-    df = dask_client.scatter(df)   
-    dscr = dask_client.submit(do_describe, df, filepath)
-    fire_and_forget(dscr)
+    do_describe(df, filepath)
+#     df = dask_client.scatter(df)   
+#     dscr = dask_client.submit(do_describe, df, filepath)
+#     fire_and_forget(dscr)
     
     
     

@@ -1,4 +1,4 @@
-# Dask
+# Dask (WIP)
 
 In this demo, we load a relatively _small_ big-data file (~120 mio rows, ~10 numerical features, 3 categories) and train a sample on a number of models on a dask cluster.  Although the entire dataset will be saved in step 1., the loaded sample in step 2. can be smaller or larger (set `with_replacement=True` and `frac > 1.0`) than the original dataset.  With the airlines data, setting a sample fraction of 0.01 returns > 1 million rows.
 

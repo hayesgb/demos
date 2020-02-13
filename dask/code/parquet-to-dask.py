@@ -13,6 +13,7 @@
 # limitations under the License.
 import os
 import json
+import time
 from pathlib import Path
 import numpy as np
 import pandas as pd
@@ -54,6 +55,9 @@ def parquet_to_dask(
     :param shards:          number of workers to launch
     :param threads_per:     number of threads per worker
     """
+    context.logger.info('sleeping...')
+    time.sleep(120)
+    
     if hasattr(context, 'dask_client'):
         context.logger.info('found cluster...')
         dask_client = context.dask_client
