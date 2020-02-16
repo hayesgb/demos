@@ -72,13 +72,15 @@ def parquet_to_dask(
     context.logger.info(dask_client)
     
     if sample is None or int(sample) == 1:
-        df = dd.read_parquet(parquet_url)
+        df = dd.read_parquet(str(parquet_url))
     else:
-        df = dd.read_parquet(parquet_url).sample(frac=sample)
+        df = dd.read_parquet(str(parquet_url)).sample(frac=sample)
 
     context.logger.info(f'column header {df.columns.values}')
     
-    #df = dask_client.persist(df)
+    if dask_key in dask_client.list_datasets():
+        dask_client.unpublish_dataset(dask_key)
+    
     dask_client.datasets[dask_key] = df
         
      # share the scheduler

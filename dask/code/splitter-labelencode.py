@@ -80,6 +80,7 @@ def splitter_labelencode(
     
     # features engineering
     features['CRSDepTime'] = features['CRSDepTime'].clip(upper=2399)
+    
     features = features.categorize(columns=categories)
     feature_classes = dict()
     

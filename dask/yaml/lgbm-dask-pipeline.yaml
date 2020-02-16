@@ -173,7 +173,7 @@
       - |-
         deploy
       - |-
-        {'kind': 'remote', 'metadata': {'name': 'flight-delay-server', 'project': 'default'}, 'spec': {'command': '', 'args': [], 'image': '', 'description': '', 'volumes': [{'flexVolume': {'driver': 'v3io/fuse', 'options': {'accessKey': 'eaed2dc3-4fe8-4ba0-a490-13e505cdce9a', 'container': 'users', 'subPath': '/admin'}}, 'name': 'v3io'}], 'volume_mounts': [{'mountPath': '/User', 'name': 'v3io'}], 'env': [{'name': 'MODEL_CLASS', 'value': 'ClassifierModel'}, {'name': 'ENABLE_EXPLAINER', 'value': 'False'}, {'name': 'V3IO_API', 'value': 'v3io-webapi.default-tenant.svc:8081'}, {'name': 'V3IO_USERNAME', 'value': 'admin'}, {'name': 'V3IO_ACCESS_KEY', 'value': 'eaed2dc3-4fe8-4ba0-a490-13e505cdce9a'}], 'config': {'spec.triggers.http': {'kind': 'http', 'maxWorkers': 8, 'attributes': {'ingresses': {}}, 'annotations': {}}}, 'base_spec': {'apiVersion': 'nuclio.io/v1', 'kind': 'nuclio:serving', 'metadata': {'annotations': {'nuclio.io/generated_by': 'function generated at 13-02-2020 by admin from /User/repos/demos/dask/model_server.ipynb'}, 'labels': {}, 'name': 'flight-delay-server'}, 'spec': {'build': {'baseImage': 'yjbds/mlrun-serving:latest', 'commands': ['pip install -U -q kfserving', 'pip install -U -q azure', 'pip install -U -q mlrun'], 'functionSourceCode': 'IyBHZW5lcmF0ZWQgYnkgbnVjbGlvLmV4cG9ydC5OdWNsaW9FeHBvcnRlciBvbiAyMDIwLTAyLTEzIDA5OjM5CgppbXBvcnQga2ZzZXJ2aW5nCmltcG9ydCBvcwppbXBvcnQgbnVtcHkgYXMgbnAKZnJvbSBjbG91ZHBpY2tsZSBpbXBvcnQgbG9hZAoKVEFSR0VUX1BBVEggPSAnL1VzZXIvcmVwb3MvZGVtb3MvZGFzay9hcnRpZmFjdHMnCk1PREVMX0ZJTEUgPSAnbGdibS1tb2RlbC5wa2wnCgpjbGFzcyBDbGFzc2lmaWVyTW9kZWwoa2ZzZXJ2aW5nLktGTW9kZWwpOgogICAgZGVmIF9faW5pdF9fKHNlbGYsIG5hbWU6IHN0ciwgbW9kZWxfZGlyOiBzdHIsIG1vZGVsID0gTm9uZSk6CiAgICAgICAgc3VwZXIoKS5fX2luaXRfXyhuYW1lKQogICAgICAgIHNlbGYubmFtZSA9IG5hbWUKICAgICAgICBzZWxmLm1vZGVsX2RpciA9IG1vZGVsX2RpcgogICAgICAgIGlmIG5vdCBtb2RlbCBpcyBOb25lOgogICAgICAgICAgICBzZWxmLmNsYXNzaWZpZXIgPSBtb2RlbAogICAgICAgICAgICBzZWxmLnJlYWR5ID0gVHJ1ZQoKICAgIGRlZiBsb2FkKHNlbGYpOgogICAgICAgIG1vZGVsX2ZpbGUgPSBvcy5wYXRoLmpvaW4oCiAgICAgICAgICAgIGtmc2VydmluZy5TdG9yYWdlLmRvd25sb2FkKHNlbGYubW9kZWxfZGlyKSwgTU9ERUxfRklMRSkKICAgICAgICBzZWxmLmNsYXNzaWZpZXIgPSBsb2FkKG9wZW4obW9kZWxfZmlsZSwgJ3JiJykpCiAgICAgICAgc2VsZi5yZWFkeSA9IFRydWUKCiAgICBkZWYgcHJlZGljdChzZWxmLCBib2R5KToKICAgICAgICB0cnk6CiAgICAgICAgICAgIGZlYXRzID0gbnAuYXNhcnJheShib2R5WydpbnN0YW5jZXMnXSkKICAgICAgICAgICAgcmVzdWx0OiBucC5uZGFycmF5ID0gc2VsZi5jbGFzc2lmaWVyLnByZWRpY3QoZmVhdHMpCiAgICAgICAgICAgIHJldHVybiByZXN1bHQudG9saXN0KCkKICAgICAgICBleGNlcHQgRXhjZXB0aW9uIGFzIGU6CiAgICAgICAgICAgIHJhaXNlIEV4Y2VwdGlvbigiRmFpbGVkIHRvIHByZWRpY3QgJXMiICUgZSkKCgpmcm9tIG1scnVuLnJ1bnRpbWVzIGltcG9ydCBudWNsaW9faW5pdF9ob29rCmRlZiBpbml0X2NvbnRleHQoY29udGV4dCk6CiAgICBudWNsaW9faW5pdF9ob29rKGNvbnRleHQsIGdsb2JhbHMoKSwgJ3NlcnZpbmcnKQoKZGVmIGhhbmRsZXIoY29udGV4dCwgZXZlbnQpOgogICAgcmV0dXJuIGNvbnRleHQubWxydW5faGFuZGxlcihjb250ZXh0LCBldmVudCkK', 'noBaseImagesPull': True}, 'env': [{'name': 'MODEL_CLASS', 'value': 'ClassifierModel'}], 'handler': 'model_server:handler', 'runtime': 'python:3.6', 'volumes': []}}, 'source': '', 'function_kind': 'serving'}}
+        {'kind': 'remote', 'metadata': {'name': 'flight-delay-server', 'project': 'default'}, 'spec': {'command': '', 'args': [], 'image': '', 'description': '', 'volumes': [{'flexVolume': {'driver': 'v3io/fuse', 'options': {'accessKey': 'eaed2dc3-4fe8-4ba0-a490-13e505cdce9a', 'container': 'users', 'subPath': '/admin'}}, 'name': 'v3io'}], 'volume_mounts': [{'mountPath': '/User', 'name': 'v3io'}], 'env': [{'name': 'MODEL_CLASS', 'value': 'ClassifierModel'}, {'name': 'ENABLE_EXPLAINER', 'value': 'False'}, {'name': 'V3IO_API', 'value': 'v3io-webapi.default-tenant.svc:8081'}, {'name': 'V3IO_USERNAME', 'value': 'admin'}, {'name': 'V3IO_ACCESS_KEY', 'value': 'eaed2dc3-4fe8-4ba0-a490-13e505cdce9a'}], 'config': {'spec.triggers.http': {'kind': 'http', 'maxWorkers': 8, 'attributes': {'ingresses': {}}, 'annotations': {}}}, 'base_spec': {'apiVersion': 'nuclio.io/v1', 'kind': 'nuclio:serving', 'metadata': {'annotations': {'nuclio.io/generated_by': 'function generated at 16-02-2020 by admin from /User/repos/demos/dask/model_server.ipynb'}, 'labels': {}, 'name': 'flight-delay-server'}, 'spec': {'build': {'commands': [], 'functionSourceCode': 'IyBHZW5lcmF0ZWQgYnkgbnVjbGlvLmV4cG9ydC5OdWNsaW9FeHBvcnRlciBvbiAyMDIwLTAyLTE2IDE0OjM4CgppbXBvcnQga2ZzZXJ2aW5nCmltcG9ydCBvcwppbXBvcnQgbnVtcHkgYXMgbnAKZnJvbSBjbG91ZHBpY2tsZSBpbXBvcnQgbG9hZAoKVEFSR0VUX1BBVEggPSAnL1VzZXIvcmVwb3MvZGVtb3MvZGFzay9hcnRpZmFjdHMnCk1PREVMX0ZJTEUgPSAnbGdibS1tb2RlbC5wa2wnCgpjbGFzcyBDbGFzc2lmaWVyTW9kZWwoa2ZzZXJ2aW5nLktGTW9kZWwpOgogICAgZGVmIF9faW5pdF9fKHNlbGYsIG5hbWU6IHN0ciwgbW9kZWxfZGlyOiBzdHIsIG1vZGVsID0gTm9uZSk6CiAgICAgICAgc3VwZXIoKS5fX2luaXRfXyhuYW1lKQogICAgICAgIHNlbGYubmFtZSA9IG5hbWUKICAgICAgICBzZWxmLm1vZGVsX2RpciA9IG1vZGVsX2RpcgogICAgICAgIGlmIG5vdCBtb2RlbCBpcyBOb25lOgogICAgICAgICAgICBzZWxmLmNsYXNzaWZpZXIgPSBtb2RlbAogICAgICAgICAgICBzZWxmLnJlYWR5ID0gVHJ1ZQoKICAgIGRlZiBsb2FkKHNlbGYpOgogICAgICAgIG1vZGVsX2ZpbGUgPSBvcy5wYXRoLmpvaW4oCiAgICAgICAgICAgIGtmc2VydmluZy5TdG9yYWdlLmRvd25sb2FkKHNlbGYubW9kZWxfZGlyKSwgTU9ERUxfRklMRSkKICAgICAgICBzZWxmLmNsYXNzaWZpZXIgPSBsb2FkKG9wZW4obW9kZWxfZmlsZSwgJ3JiJykpCiAgICAgICAgc2VsZi5yZWFkeSA9IFRydWUKCiAgICBkZWYgcHJlZGljdChzZWxmLCBib2R5KToKICAgICAgICB0cnk6CiAgICAgICAgICAgIGZlYXRzID0gbnAuYXNhcnJheShib2R5WydpbnN0YW5jZXMnXSkKICAgICAgICAgICAgcmVzdWx0OiBucC5uZGFycmF5ID0gc2VsZi5jbGFzc2lmaWVyLnByZWRpY3QoZmVhdHMpCiAgICAgICAgICAgIHJldHVybiByZXN1bHQudG9saXN0KCkKICAgICAgICBleGNlcHQgRXhjZXB0aW9uIGFzIGU6CiAgICAgICAgICAgIHJhaXNlIEV4Y2VwdGlvbigiRmFpbGVkIHRvIHByZWRpY3QgJXMiICUgZSkKCgpmcm9tIG1scnVuLnJ1bnRpbWVzIGltcG9ydCBudWNsaW9faW5pdF9ob29rCmRlZiBpbml0X2NvbnRleHQoY29udGV4dCk6CiAgICBudWNsaW9faW5pdF9ob29rKGNvbnRleHQsIGdsb2JhbHMoKSwgJ3NlcnZpbmcnKQoKZGVmIGhhbmRsZXIoY29udGV4dCwgZXZlbnQpOgogICAgcmV0dXJuIGNvbnRleHQubWxydW5faGFuZGxlcihjb250ZXh0LCBldmVudCkK', 'image': 'yjbds/mlrun-serving', 'noBaseImagesPull': True}, 'env': [{'name': 'MODEL_CLASS', 'value': 'ClassifierModel'}], 'handler': 'model_server:handler', 'runtime': 'python:3.6', 'volumes': []}}, 'source': '', 'function_kind': 'serving'}}
       - |-
         -p
       - |-
@@ -249,6 +249,8 @@
               {{tasks.todask.outputs.parameters.todask-scheduler}}
         "dependencies":
         - |-
+          splitter
+        - |-
           todask
         "name": |-
           train
@@ -279,6 +281,22 @@
       - |-
         splitter
       - |-
+        -p
+      - |-
+        dask_key=airlines
+      - |-
+        -p
+      - |-
+        label_column=ArrDelay
+      - |-
+        -p
+      - |-
+        categories=['UniqueCarrier', 'Origin', 'Dest']
+      - |-
+        -p
+      - |-
+        target_path=/User/repos/demos/dask/artifacts
+      - |-
         -i
       - |-
         dask_client={{inputs.parameters.todask-scheduler}}
@@ -293,7 +311,7 @@
       - |-
         --handler
       - |-
-        train_valid_test
+        splitter_labelencode
       - |-
         --runtime
       - |-
