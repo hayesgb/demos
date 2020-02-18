@@ -65,10 +65,6 @@ def clf_logreg_dask(
         clf = LogisticRegression(fit_intercept=True, solver='admm', max_iter=100)
         clf.fit(xtrain.values, ytrain.values)
 
-        print(clf)
-        print(coef_)
-        print(intercept_)
-
         filepath = os.path.join(target_path, name)
         dump(clf, open(filepath, 'wb'))
         context.log_artifact(key, target_path=filepath)

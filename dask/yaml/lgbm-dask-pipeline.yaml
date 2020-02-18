@@ -173,7 +173,7 @@
       - |-
         deploy
       - |-
-        {'kind': 'remote', 'metadata': {'name': 'flight-delay-server', 'project': 'default'}, 'spec': {'command': '', 'args': [], 'image': '', 'description': '', 'volumes': [{'flexVolume': {'driver': 'v3io/fuse', 'options': {'accessKey': 'eaed2dc3-4fe8-4ba0-a490-13e505cdce9a', 'container': 'users', 'subPath': '/admin'}}, 'name': 'v3io'}], 'volume_mounts': [{'mountPath': '/User', 'name': 'v3io'}], 'env': [{'name': 'MODEL_CLASS', 'value': 'ClassifierModel'}, {'name': 'ENABLE_EXPLAINER', 'value': 'False'}, {'name': 'V3IO_API', 'value': 'v3io-webapi.default-tenant.svc:8081'}, {'name': 'V3IO_USERNAME', 'value': 'admin'}, {'name': 'V3IO_ACCESS_KEY', 'value': 'eaed2dc3-4fe8-4ba0-a490-13e505cdce9a'}], 'config': {'spec.triggers.http': {'kind': 'http', 'maxWorkers': 8, 'attributes': {'ingresses': {}}, 'annotations': {}}}, 'base_spec': {'apiVersion': 'nuclio.io/v1', 'kind': 'nuclio:serving', 'metadata': {'annotations': {'nuclio.io/generated_by': 'function generated at 16-02-2020 by admin from /User/repos/demos/dask/model_server.ipynb'}, 'labels': {}, 'name': 'flight-delay-server'}, 'spec': {'build': {'commands': [], 'functionSourceCode': 'IyBHZW5lcmF0ZWQgYnkgbnVjbGlvLmV4cG9ydC5OdWNsaW9FeHBvcnRlciBvbiAyMDIwLTAyLTE2IDE0OjM4CgppbXBvcnQga2ZzZXJ2aW5nCmltcG9ydCBvcwppbXBvcnQgbnVtcHkgYXMgbnAKZnJvbSBjbG91ZHBpY2tsZSBpbXBvcnQgbG9hZAoKVEFSR0VUX1BBVEggPSAnL1VzZXIvcmVwb3MvZGVtb3MvZGFzay9hcnRpZmFjdHMnCk1PREVMX0ZJTEUgPSAnbGdibS1tb2RlbC5wa2wnCgpjbGFzcyBDbGFzc2lmaWVyTW9kZWwoa2ZzZXJ2aW5nLktGTW9kZWwpOgogICAgZGVmIF9faW5pdF9fKHNlbGYsIG5hbWU6IHN0ciwgbW9kZWxfZGlyOiBzdHIsIG1vZGVsID0gTm9uZSk6CiAgICAgICAgc3VwZXIoKS5fX2luaXRfXyhuYW1lKQogICAgICAgIHNlbGYubmFtZSA9IG5hbWUKICAgICAgICBzZWxmLm1vZGVsX2RpciA9IG1vZGVsX2RpcgogICAgICAgIGlmIG5vdCBtb2RlbCBpcyBOb25lOgogICAgICAgICAgICBzZWxmLmNsYXNzaWZpZXIgPSBtb2RlbAogICAgICAgICAgICBzZWxmLnJlYWR5ID0gVHJ1ZQoKICAgIGRlZiBsb2FkKHNlbGYpOgogICAgICAgIG1vZGVsX2ZpbGUgPSBvcy5wYXRoLmpvaW4oCiAgICAgICAgICAgIGtmc2VydmluZy5TdG9yYWdlLmRvd25sb2FkKHNlbGYubW9kZWxfZGlyKSwgTU9ERUxfRklMRSkKICAgICAgICBzZWxmLmNsYXNzaWZpZXIgPSBsb2FkKG9wZW4obW9kZWxfZmlsZSwgJ3JiJykpCiAgICAgICAgc2VsZi5yZWFkeSA9IFRydWUKCiAgICBkZWYgcHJlZGljdChzZWxmLCBib2R5KToKICAgICAgICB0cnk6CiAgICAgICAgICAgIGZlYXRzID0gbnAuYXNhcnJheShib2R5WydpbnN0YW5jZXMnXSkKICAgICAgICAgICAgcmVzdWx0OiBucC5uZGFycmF5ID0gc2VsZi5jbGFzc2lmaWVyLnByZWRpY3QoZmVhdHMpCiAgICAgICAgICAgIHJldHVybiByZXN1bHQudG9saXN0KCkKICAgICAgICBleGNlcHQgRXhjZXB0aW9uIGFzIGU6CiAgICAgICAgICAgIHJhaXNlIEV4Y2VwdGlvbigiRmFpbGVkIHRvIHByZWRpY3QgJXMiICUgZSkKCgpmcm9tIG1scnVuLnJ1bnRpbWVzIGltcG9ydCBudWNsaW9faW5pdF9ob29rCmRlZiBpbml0X2NvbnRleHQoY29udGV4dCk6CiAgICBudWNsaW9faW5pdF9ob29rKGNvbnRleHQsIGdsb2JhbHMoKSwgJ3NlcnZpbmcnKQoKZGVmIGhhbmRsZXIoY29udGV4dCwgZXZlbnQpOgogICAgcmV0dXJuIGNvbnRleHQubWxydW5faGFuZGxlcihjb250ZXh0LCBldmVudCkK', 'image': 'yjbds/mlrun-serving', 'noBaseImagesPull': True}, 'env': [{'name': 'MODEL_CLASS', 'value': 'ClassifierModel'}], 'handler': 'model_server:handler', 'runtime': 'python:3.6', 'volumes': []}}, 'source': '', 'function_kind': 'serving'}}
+        {'kind': 'remote', 'metadata': {'name': 'fdsvr', 'project': 'default'}, 'spec': {'command': '', 'args': [], 'image': '', 'description': '', 'volumes': [{'flexVolume': {'driver': 'v3io/fuse', 'options': {'accessKey': 'eaed2dc3-4fe8-4ba0-a490-13e505cdce9a', 'container': 'users', 'subPath': '/admin'}}, 'name': 'v3io'}], 'volume_mounts': [{'mountPath': '/User', 'name': 'v3io'}], 'env': [{'name': 'MODEL_CLASS', 'value': 'ClassifierModel'}, {'name': 'ENABLE_EXPLAINER', 'value': 'False'}, {'name': 'V3IO_API', 'value': 'v3io-webapi.default-tenant.svc:8081'}, {'name': 'V3IO_USERNAME', 'value': 'admin'}, {'name': 'V3IO_ACCESS_KEY', 'value': 'eaed2dc3-4fe8-4ba0-a490-13e505cdce9a'}], 'config': {'spec.triggers.http': {'kind': 'http', 'maxWorkers': 8, 'attributes': {'ingresses': {}}, 'annotations': {}}}, 'base_spec': {'apiVersion': 'nuclio.io/v1', 'kind': 'Function', 'metadata': {'annotations': {'nuclio.io/generated_by': 'function generated at 17-02-2020 by admin from /User/repos/demos/dask/model_server.ipynb'}, 'labels': {}, 'name': 'fdsvr'}, 'spec': {'build': {'baseImage': 'yjbds/mlrun-serving:dev', 'commands': [], 'functionSourceCode': 'IyBHZW5lcmF0ZWQgYnkgbnVjbGlvLmV4cG9ydC5OdWNsaW9FeHBvcnRlciBvbiAyMDIwLTAyLTE3IDE0OjE4CgppbXBvcnQga2ZzZXJ2aW5nCmltcG9ydCBvcwppbXBvcnQgbnVtcHkgYXMgbnAKZnJvbSBjbG91ZHBpY2tsZSBpbXBvcnQgbG9hZAoKVEFSR0VUX1BBVEggPSAnL1VzZXIvcmVwb3MvZGVtb3MvZGFzay9hcnRpZmFjdHMnCk1PREVMX0ZJTEUgPSAnbGdibS1tb2RlbC5wa2wnCgpjbGFzcyBDbGFzc2lmaWVyTW9kZWwoa2ZzZXJ2aW5nLktGTW9kZWwpOgogICAgZGVmIF9faW5pdF9fKHNlbGYsIG5hbWU6IHN0ciwgbW9kZWxfZGlyOiBzdHIsIG1vZGVsID0gTm9uZSk6CiAgICAgICAgc3VwZXIoKS5fX2luaXRfXyhuYW1lKQogICAgICAgIHNlbGYubmFtZSA9IG5hbWUKICAgICAgICBzZWxmLm1vZGVsX2RpciA9IG1vZGVsX2RpcgogICAgICAgIGlmIG5vdCBtb2RlbCBpcyBOb25lOgogICAgICAgICAgICBzZWxmLmNsYXNzaWZpZXIgPSBtb2RlbAogICAgICAgICAgICBzZWxmLnJlYWR5ID0gVHJ1ZQoKICAgIGRlZiBsb2FkKHNlbGYpOgogICAgICAgIG1vZGVsX2ZpbGUgPSBvcy5wYXRoLmpvaW4oCiAgICAgICAgICAgIGtmc2VydmluZy5TdG9yYWdlLmRvd25sb2FkKHNlbGYubW9kZWxfZGlyKSwgTU9ERUxfRklMRSkKICAgICAgICBzZWxmLmNsYXNzaWZpZXIgPSBsb2FkKG9wZW4obW9kZWxfZmlsZSwgJ3JiJykpCiAgICAgICAgc2VsZi5yZWFkeSA9IFRydWUKCiAgICBkZWYgcHJlZGljdChzZWxmLCBib2R5KToKICAgICAgICB0cnk6CiAgICAgICAgICAgIGZlYXRzID0gbnAuYXNhcnJheShib2R5WydpbnN0YW5jZXMnXSkKICAgICAgICAgICAgcmVzdWx0OiBucC5uZGFycmF5ID0gc2VsZi5jbGFzc2lmaWVyLnByZWRpY3QoZmVhdHMpCiAgICAgICAgICAgIHJldHVybiByZXN1bHQudG9saXN0KCkKICAgICAgICBleGNlcHQgRXhjZXB0aW9uIGFzIGU6CiAgICAgICAgICAgIHJhaXNlIEV4Y2VwdGlvbigiRmFpbGVkIHRvIHByZWRpY3QgJXMiICUgZSkKCgpmcm9tIG1scnVuLnJ1bnRpbWVzIGltcG9ydCBudWNsaW9faW5pdF9ob29rCmRlZiBpbml0X2NvbnRleHQoY29udGV4dCk6CiAgICBudWNsaW9faW5pdF9ob29rKGNvbnRleHQsIGdsb2JhbHMoKSwgJ3NlcnZpbmcnKQoKZGVmIGhhbmRsZXIoY29udGV4dCwgZXZlbnQpOgogICAgcmV0dXJuIGNvbnRleHQubWxydW5faGFuZGxlcihjb250ZXh0LCBldmVudCkK', 'noBaseImagesPull': True}, 'env': [{'name': 'MODEL_CLASS', 'value': 'ClassifierModel'}], 'handler': 'model_server:handler', 'runtime': 'python:3.6', 'volumes': []}}, 'source': '', 'function_kind': 'serving'}}
       - |-
         -p
       - |-
@@ -181,21 +181,155 @@
       - |-
         -m
       - |-
-        dask_v1={{inputs.parameters.train-lgbm-model}}
+        dask_v1={{inputs.parameters.lgbm-lgbm-model}}
       "image": |-
         yjbds/mlrun-dask:dev
     "inputs":
       "parameters":
       - "name": |-
-          train-lgbm-model
+          lgbm-lgbm-model
     "name": |-
-      deploy-flight-delay-server
+      deploy-fdsvr
     "outputs":
       "artifacts":
       - "name": |-
-          deploy-flight-delay-server-endpoint
+          deploy-fdsvr-endpoint
         "path": |-
           /tmp/output
+  - "container":
+      "command":
+      - |-
+        python
+      - |-
+        -m
+      - |-
+        mlrun
+      - |-
+        run
+      - |-
+        --kfp
+      - |-
+        --from-env
+      - |-
+        --workflow
+      - |-
+        {{workflow.uid}}
+      - |-
+        --name
+      - |-
+        lgbm
+      - |-
+        -p
+      - |-
+        train_set=('xtrain', 'ytrain')
+      - |-
+        -p
+      - |-
+        valid_set=('xvalid', 'yvalid')
+      - |-
+        -p
+      - |-
+        target_path=/User/repos/demos/dask/artifacts
+      - |-
+        -p
+      - |-
+        name=lgbm-model.pkl
+      - |-
+        -p
+      - |-
+        key=lgbm-model
+      - |-
+        -p
+      - |-
+        params={'max_depth': 3, 'learning_rate': 0.1, 'n_estimators': 3, 'reg_alpha': 0.0, 'reg_lambda': 0.0, 'random_state': 1, 'tree_learner': 'data', 'silent': False}
+      - |-
+        -i
+      - |-
+        dask_client={{inputs.parameters.todask-scheduler}}
+      - |-
+        -o
+      - |-
+        lgbm-model
+      - |-
+        --handler
+      - |-
+        clf_lgbm_dask
+      - |-
+        --runtime
+      - |-
+        {'kind': 'job', 'metadata': {'name': 'clf_lgbm_dask', 'hash': '522464664a8acb99257284aa0c8effe90b104bb0', 'project': 'default'}, 'spec': {'command': '/User/repos/demos/dask/code/clf_lgbm_dask.py', 'args': [], 'image': 'yjbds/mlrun-dask:dev', 'volumes': [{'flexVolume': {'driver': 'v3io/fuse', 'options': {'accessKey': 'eaed2dc3-4fe8-4ba0-a490-13e505cdce9a', 'container': 'users', 'subPath': '/admin'}}, 'name': 'v3io'}], 'volume_mounts': [{'mountPath': '/User', 'name': 'v3io'}], 'env': [{'name': 'V3IO_API', 'value': 'v3io-webapi.default-tenant.svc:8081'}, {'name': 'V3IO_USERNAME', 'value': 'admin'}, {'name': 'V3IO_ACCESS_KEY', 'value': 'eaed2dc3-4fe8-4ba0-a490-13e505cdce9a'}], 'description': '', 'build': {'image': 'yjbds/mlrun-dask:dev', 'commands': []}}}
+      - |-
+        --out-path
+      - |-
+        /User/repos/demos/dask/artifacts
+      - |-
+        --image
+      - |-
+        yjbds/mlrun-dask:dev
+      - ""
+      "env":
+      - "name": |-
+          MLRUN_DBPATH
+        "value": |-
+          http://mlrun-api:8080
+      - "name": |-
+          V3IO_API
+        "value": |-
+          v3io-webapi.default-tenant.svc:8081
+      - "name": |-
+          V3IO_USERNAME
+        "value": |-
+          admin
+      - "name": |-
+          V3IO_ACCESS_KEY
+        "value": |-
+          eaed2dc3-4fe8-4ba0-a490-13e505cdce9a
+      "image": |-
+        yjbds/mlrun-dask:dev
+      "volumeMounts":
+      - "mountPath": |-
+          /User
+        "name": |-
+          v3io
+    "inputs":
+      "parameters":
+      - "name": |-
+          todask-scheduler
+    "name": |-
+      lgbm
+    "outputs":
+      "artifacts":
+      - "name": |-
+          mlpipeline-ui-metadata
+        "path": |-
+          /mlpipeline-ui-metadata.json
+      - "name": |-
+          mlpipeline-metrics
+        "path": |-
+          /mlpipeline-metrics.json
+      - "name": |-
+          lgbm-lgbm-model
+        "path": |-
+          /tmp/lgbm-model
+      "parameters":
+      - "name": |-
+          lgbm-lgbm-model
+        "valueFrom":
+          "path": |-
+            /tmp/lgbm-model
+    "volumes":
+    - "flexVolume":
+        "driver": |-
+          v3io/fuse
+        "options":
+          "accessKey": |-
+            eaed2dc3-4fe8-4ba0-a490-13e505cdce9a
+          "container": |-
+            users
+          "subPath": |-
+            /admin
+      "name": |-
+        v3io
   - "dag":
       "tasks":
       - "name": |-
@@ -205,16 +339,31 @@
       - "arguments":
           "parameters":
           - "name": |-
-              train-lgbm-model
+              lgbm-lgbm-model
             "value": |-
-              {{tasks.train.outputs.parameters.train-lgbm-model}}
+              {{tasks.lgbm.outputs.parameters.lgbm-lgbm-model}}
         "dependencies":
         - |-
-          train
+          lgbm
         "name": |-
-          deploy-flight-delay-server
+          deploy-fdsvr
         "template": |-
-          deploy-flight-delay-server
+          deploy-fdsvr
+      - "arguments":
+          "parameters":
+          - "name": |-
+              todask-scheduler
+            "value": |-
+              {{tasks.todask.outputs.parameters.todask-scheduler}}
+        "dependencies":
+        - |-
+          splitter
+        - |-
+          todask
+        "name": |-
+          lgbm
+        "template": |-
+          lgbm
       - "arguments":
           "parameters":
           - "name": |-
@@ -228,6 +377,19 @@
           splitter
         "template": |-
           splitter
+      - "arguments":
+          "parameters":
+          - "name": |-
+              todask-scheduler
+            "value": |-
+              {{tasks.todask.outputs.parameters.todask-scheduler}}
+        "dependencies":
+        - |-
+          todask
+        "name": |-
+          summarize
+        "template": |-
+          summarize
       - "arguments":
           "parameters":
           - "name": |-
@@ -253,9 +415,9 @@
         - |-
           todask
         "name": |-
-          train
+          xgb
         "template": |-
-          train
+          xgb
     "name": |-
       my-dask-training-pipeline
   - "container":
@@ -373,6 +535,122 @@
           splitter-test_set
         "path": |-
           /tmp/test_set
+    "volumes":
+    - "flexVolume":
+        "driver": |-
+          v3io/fuse
+        "options":
+          "accessKey": |-
+            eaed2dc3-4fe8-4ba0-a490-13e505cdce9a
+          "container": |-
+            users
+          "subPath": |-
+            /admin
+      "name": |-
+        v3io
+  - "container":
+      "command":
+      - |-
+        python
+      - |-
+        -m
+      - |-
+        mlrun
+      - |-
+        run
+      - |-
+        --kfp
+      - |-
+        --from-env
+      - |-
+        --workflow
+      - |-
+        {{workflow.uid}}
+      - |-
+        --name
+      - |-
+        summarize
+      - |-
+        -p
+      - |-
+        dask_key=airlines
+      - |-
+        -p
+      - |-
+        target_path=/User/repos/demos/dask/artifacts
+      - |-
+        -p
+      - |-
+        name=table-summary.csv
+      - |-
+        -p
+      - |-
+        key=table-summary
+      - |-
+        -i
+      - |-
+        dask_client={{inputs.parameters.todask-scheduler}}
+      - |-
+        -o
+      - |-
+        table-summary
+      - |-
+        --handler
+      - |-
+        table_summary
+      - |-
+        --runtime
+      - |-
+        {'kind': 'job', 'metadata': {'name': 'describe', 'hash': 'dc403635a9d553ec83302dbc7f8aa0baf29e7f6d', 'project': 'default'}, 'spec': {'command': '/User/repos/demos/dask/code/describe.py', 'args': [], 'image': 'yjbds/mlrun-dask:dev', 'volumes': [{'flexVolume': {'driver': 'v3io/fuse', 'options': {'accessKey': 'eaed2dc3-4fe8-4ba0-a490-13e505cdce9a', 'container': 'users', 'subPath': '/admin'}}, 'name': 'v3io'}], 'volume_mounts': [{'mountPath': '/User', 'name': 'v3io'}], 'env': [{'name': 'V3IO_API', 'value': 'v3io-webapi.default-tenant.svc:8081'}, {'name': 'V3IO_USERNAME', 'value': 'admin'}, {'name': 'V3IO_ACCESS_KEY', 'value': 'eaed2dc3-4fe8-4ba0-a490-13e505cdce9a'}], 'description': '', 'build': {'image': 'yjbds/mlrun-dask:dev', 'commands': []}}}
+      - |-
+        --image
+      - |-
+        yjbds/mlrun-dask:dev
+      - ""
+      "env":
+      - "name": |-
+          MLRUN_DBPATH
+        "value": |-
+          http://mlrun-api:8080
+      - "name": |-
+          V3IO_API
+        "value": |-
+          v3io-webapi.default-tenant.svc:8081
+      - "name": |-
+          V3IO_USERNAME
+        "value": |-
+          admin
+      - "name": |-
+          V3IO_ACCESS_KEY
+        "value": |-
+          eaed2dc3-4fe8-4ba0-a490-13e505cdce9a
+      "image": |-
+        yjbds/mlrun-dask:dev
+      "volumeMounts":
+      - "mountPath": |-
+          /User
+        "name": |-
+          v3io
+    "inputs":
+      "parameters":
+      - "name": |-
+          todask-scheduler
+    "name": |-
+      summarize
+    "outputs":
+      "artifacts":
+      - "name": |-
+          mlpipeline-ui-metadata
+        "path": |-
+          /mlpipeline-ui-metadata.json
+      - "name": |-
+          mlpipeline-metrics
+        "path": |-
+          /mlpipeline-metrics.json
+      - "name": |-
+          summarize-table-summary
+        "path": |-
+          /tmp/table-summary
     "volumes":
     - "flexVolume":
         "driver": |-
@@ -541,7 +819,7 @@
       - |-
         --name
       - |-
-        train
+        xgb
       - |-
         -p
       - |-
@@ -557,15 +835,15 @@
       - |-
         -p
       - |-
-        name=lgbm-model.pkl
+        name=xgb-model.pkl
       - |-
         -p
       - |-
-        key=lgbm-model
+        key=xgb-model
       - |-
         -p
       - |-
-        params={'max_depth': 3, 'learning_rate': 0.1, 'n_estimators': 3, 'reg_alpha': 0.0, 'reg_lambda': 0.0, 'random_state': 1, 'tree_learner': 'data', 'silent': False}
+        params={'max_depth': 3, 'num_boost_round': 3, 'eta': 1, 'objective': 'binary:logistic', 'eval_metric': ['auc', 'ams@0'], 'evals': [('xvalid', 'yvalid')], 'silent': False, 'verbose_eval': True}
       - |-
         -i
       - |-
@@ -573,15 +851,15 @@
       - |-
         -o
       - |-
-        lgbm-model
+        xgb-model
       - |-
         --handler
       - |-
-        clf_lgbm_dask
+        clf_xgboost_dask
       - |-
         --runtime
       - |-
-        {'kind': 'job', 'metadata': {'name': 'clf_lgbm_dask', 'hash': '522464664a8acb99257284aa0c8effe90b104bb0', 'project': 'default'}, 'spec': {'command': '/User/repos/demos/dask/code/clf_lgbm_dask.py', 'args': [], 'image': 'yjbds/mlrun-dask:dev', 'volumes': [{'flexVolume': {'driver': 'v3io/fuse', 'options': {'accessKey': 'eaed2dc3-4fe8-4ba0-a490-13e505cdce9a', 'container': 'users', 'subPath': '/admin'}}, 'name': 'v3io'}], 'volume_mounts': [{'mountPath': '/User', 'name': 'v3io'}], 'env': [{'name': 'V3IO_API', 'value': 'v3io-webapi.default-tenant.svc:8081'}, {'name': 'V3IO_USERNAME', 'value': 'admin'}, {'name': 'V3IO_ACCESS_KEY', 'value': 'eaed2dc3-4fe8-4ba0-a490-13e505cdce9a'}], 'description': '', 'build': {'image': 'yjbds/mlrun-dask:dev', 'commands': []}}}
+        {'kind': 'job', 'metadata': {'name': 'clf_xgboost_dask', 'hash': 'cca27d04c2153c6c9dfdce2c366201d3df0f67c4', 'project': 'default'}, 'spec': {'command': '/User/repos/demos/dask/code/clf_xgboost_dask.py', 'args': [], 'image': 'yjbds/mlrun-dask:dev', 'volumes': [{'flexVolume': {'driver': 'v3io/fuse', 'options': {'accessKey': 'eaed2dc3-4fe8-4ba0-a490-13e505cdce9a', 'container': 'users', 'subPath': '/admin'}}, 'name': 'v3io'}], 'volume_mounts': [{'mountPath': '/User', 'name': 'v3io'}], 'env': [{'name': 'V3IO_API', 'value': 'v3io-webapi.default-tenant.svc:8081'}, {'name': 'V3IO_USERNAME', 'value': 'admin'}, {'name': 'V3IO_ACCESS_KEY', 'value': 'eaed2dc3-4fe8-4ba0-a490-13e505cdce9a'}], 'description': '', 'build': {'image': 'yjbds/mlrun-dask:dev', 'commands': []}}}
       - |-
         --out-path
       - |-
@@ -620,7 +898,7 @@
       - "name": |-
           todask-scheduler
     "name": |-
-      train
+      xgb
     "outputs":
       "artifacts":
       - "name": |-
@@ -632,15 +910,9 @@
         "path": |-
           /mlpipeline-metrics.json
       - "name": |-
-          train-lgbm-model
+          xgb-xgb-model
         "path": |-
-          /tmp/lgbm-model
-      "parameters":
-      - "name": |-
-          train-lgbm-model
-        "valueFrom":
-          "path": |-
-            /tmp/lgbm-model
+          /tmp/xgb-model
     "volumes":
     - "flexVolume":
         "driver": |-
