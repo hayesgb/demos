@@ -37,7 +37,8 @@ def parquet_to_dask(
     dask_key: str = '',
     target_path: str = '',
     scheduler_filename: str = 'scheduler.json',
-    scheduler_key: str = 'scheduler'
+    scheduler_key: str = 'scheduler',
+    reuse_dataset: bool = False
 ) -> None:
     """Load parquet dataset into dask cluster
     
@@ -47,13 +48,19 @@ def parquet_to_dask(
     
     Note that only `sample` fraction of the data will be managed by the cluster
     
-    :param context:         the function context
-    :param parquet_url:     url of the parquet file or partitioned dataset as either
-                            artifact DataItem, string, or path object (see pandas read_csv)
-    :param sample:          (None) sample size as fraction 0.0-1.0, if None
-                            or 1 then the entire sample
-    :param shards:          number of workers to launch
-    :param threads_per:     number of threads per worker
+    :param context:            the function context
+    :param parquet_url:        url of the parquet file or partitioned dataset as either
+                               artifact DataItem, string, or path object (see pandas read_csv)
+    :param sample:             (None) sample size as fraction 0.0-1.0, if None
+                               or 1 then the entire sample
+    :param shards:             number of workers to launch
+    :param threads_per:        number of threads per worker
+    :param memory_limit:       
+    :param dask_key:           key of data in the artifact store
+    :param target_path:        file path of the data file/partitions 
+    :param scheduler_filename: dask scheduler information
+    :param scheduler_key:      name of dask scheduler file in the artifact store
+    :param reuse_dataset:      if the data is already loaded skip loading and reuse
     """
     context.logger.info('sleeping...')
     time.sleep(120)
@@ -70,19 +77,18 @@ def parquet_to_dask(
         dask_client = Client(cluster)
 
     context.logger.info(dask_client)
-    
-    if sample is None or int(sample) == 1:
-        df = dd.read_parquet(str(parquet_url))
-    else:
-        df = dd.read_parquet(str(parquet_url)).sample(frac=sample)
 
-    context.logger.info(f'column header {df.columns.values}')
+    if not reuse_dataset:
+        if dask_key in dask_client.list_datasets():
+            dask_client.unpublish_dataset(dask_key)
+
+        if sample is None or int(sample) == 1:
+            df = dd.read_parquet(str(parquet_url))
+        else:
+            df = dd.read_parquet(str(parquet_url)).sample(frac=sample)
+        context.logger.info(f'column header {df.columns.values}')
+        dask_client.datasets[dask_key] = df
     
-    if dask_key in dask_client.list_datasets():
-        dask_client.unpublish_dataset(dask_key)
-    
-    dask_client.datasets[dask_key] = df
-        
      # share the scheduler
     filepath = os.path.join(target_path, scheduler_filename)
     dask_client.write_scheduler_file(filepath)
